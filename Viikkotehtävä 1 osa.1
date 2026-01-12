@@ -1,0 +1,26 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    srand(time(0));
+    int luku = rand() % 20 + 1;
+    int arvaus;
+
+    while (true) {
+        cout << "Arvaa luku 1-20: ";
+        cin >> arvaus;
+
+        if (arvaus < luku) {
+            cout << "Luku on suurempi" << endl;
+        } else if (arvaus > luku) {
+            cout << "Luku on pienempi" << endl;
+        } else {
+            cout << "Oikea vastaus" << endl;
+            break;
+        }
+    }
+
+    return 0;
+}

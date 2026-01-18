@@ -1,0 +1,101 @@
+#include <iostream>
+#include "Game.h"
+
+using namespace std;
+
+int main()
+{
+    cout << "Game play!" << endl;
+
+    int mn;
+    cout << "Anna maximinumero" << endl;
+    cin >> mn;
+
+    Game game(mn);
+    game.play();
+
+    return 0;
+}
+
+
+
+
+#include "Game.h"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+Game::Game(int mn)
+{
+    maxNumber = mn;
+    numOfGuesses = 0;
+    stayInLoop = true;
+
+    srand(time(0));
+    randomNumber = rand() % maxNumber + 1;
+
+    cout << "Game konstruktori, maxNumber = " << maxNumber << endl;
+}
+
+Game::~Game()
+{
+    cout << "Game destruktori" << endl;
+}
+
+void Game::play()
+{
+    while (stayInLoop)
+    {
+        cout << "Give your guess between 1-" << maxNumber << endl;
+        cin >> playerGuess;
+        numOfGuesses++;
+
+        if (playerGuess == randomNumber)
+        {
+            cout << "Arvasit oikein luku = " << playerGuess << endl;
+            stayInLoop = false;
+        }
+        else if (playerGuess < randomNumber)
+        {
+            cout << "Lukusi on liian pieni" << endl;
+        }
+        else
+        {
+            cout << "Lukusi on liian suuri" << endl;
+        }
+    }
+
+    printGameResult();
+}
+
+void Game::printGameResult()
+{
+    cout << "Arvauksia yhteensa: " << numOfGuesses << endl;
+}
+
+
+
+
+#ifndef GAME_H
+#define GAME_H
+
+class Game
+{
+private:
+    int maxNumber;
+    int randomNumber;
+    int playerGuess;
+    int numOfGuesses;
+    bool stayInLoop;
+
+public:
+    Game(int mn);
+    ~Game();
+
+    void play();
+    void printGameResult();
+};
+
+#endif
